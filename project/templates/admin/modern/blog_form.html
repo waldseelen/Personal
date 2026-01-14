@@ -1,0 +1,261 @@
+{% extends "admin/modern/base.html" %}
+
+{% block title %}{% if post %}Yazıyı Düzenle{% else %}Yeni Yazı Oluştur{% endif %}{% endblock %}
+
+{% block extra_head %}
+<!-- SimpleMDE for Markdown Editor -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+<script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+{% endblock %}
+
+{% block content %}
+<div class="max-w-5xl mx-auto space-y-6">
+    <!-- Page Header -->
+    <div class="flex items-center justify-between">
+        <div class="flex items-center space-x-4">
+            <a href="{% url 'modern_admin:blog' %}"
+               class="w-10 h-10 rounded-lg bg-gray-100 flex items-center justify-center text-gray-500 hover:bg-gray-200 transition">
+                <i class="fas fa-arrow-left"></i>
+            </a>
+            <div>
+                <h1 class="text-2xl font-bold text-gray-900">
+                    {% if post %}Yazıyı Düzenle{% else %}Yeni Yazı Oluştur{% endif %}
+                </h1>
+                <p class="text-sm text-gray-500">
+                    {% if post %}Son güncelleme: {{ post.updated_at|date:"d M Y, H:i" }}{% else %}Blog yazınızı oluşturun{% endif %}
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Form -->
+    <form method="POST" enctype="multipart/form-data" class="space-y-6" x-data="{
+        status: '{{ post.status|default:'draft' }}',
+        showSchedule: false
+    }">
+        {% csrf_token %}
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <!-- Main Content -->
+            <div class="lg:col-span-2 space-y-6">
+                <!-- Title -->
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+                    <label for="title" class="block text-sm font-medium text-gray-700 mb-2">
+                        Başlık <span class="text-red-500">*</span>
+                    </label>
+                    <input type="text" name="title" id="title" required
+                           value="{{ post.title|default:'' }}"
+                           class="block w-full px-4 py-3 border border-gray-200 rounded-xl text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-admin-primary focus:border-transparent text-lg"
+                           placeholder="Blog yazısının başlığı...">
+                </div>
+
+                <!-- Slug -->
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+                    <label for="slug" class="block text-sm font-medium text-gray-700 mb-2">
+                        URL Slug
+                    </label>
+                    <div class="flex items-center">
+                        <span class="text-gray-400 mr-2">/blog/</span>
+                        <input type="text" name="slug" id="slug"
+                               value="{{ post.slug|default:'' }}"
+                               class="flex-1 px-4 py-2 border border-gray-200 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-admin-primary focus:border-transparent"
+                               placeholder="otomatik-olusturulacak">
+                    </div>
+                    <p class="text-xs text-gray-400 mt-1">Boş bırakırsanız başlıktan otomatik oluşturulur</p>
+                </div>
+
+                <!-- Excerpt -->
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+                    <label for="excerpt" class="block text-sm font-medium text-gray-700 mb-2">
+                        Özet
+                    </label>
+                    <textarea name="excerpt" id="excerpt" rows="3"
+                              class="block w-full px-4 py-3 border border-gray-200 rounded-xl text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-admin-primary focus:border-transparent resize-none"
+                              placeholder="Yazının kısa özeti (SEO ve liste görünümü için)...">{{ post.excerpt|default:'' }}</textarea>
+                    <p class="text-xs text-gray-400 mt-1">Maksimum 500 karakter</p>
+                </div>
+
+                <!-- Content -->
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+                    <label for="content" class="block text-sm font-medium text-gray-700 mb-2">
+                        İçerik <span class="text-red-500">*</span>
+                    </label>
+                    <textarea name="content" id="content" rows="20">{{ post.content|default:'' }}</textarea>
+                </div>
+
+                <!-- SEO Settings -->
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+                        <i class="fas fa-search text-purple-500 mr-2"></i>
+                        SEO Ayarları
+                    </h3>
+
+                    <div class="space-y-4">
+                        <div>
+                            <label for="meta_description" class="block text-sm font-medium text-gray-700 mb-2">
+                                Meta Açıklama
+                            </label>
+                            <textarea name="meta_description" id="meta_description" rows="2"
+                                      class="block w-full px-4 py-3 border border-gray-200 rounded-xl text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-admin-primary focus:border-transparent resize-none"
+                                      placeholder="Arama motorlarında görünecek açıklama (155-160 karakter önerilir)...">{{ post.meta_description|default:'' }}</textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="space-y-6">
+                <!-- Publish Settings -->
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+                        <i class="fas fa-cog text-gray-500 mr-2"></i>
+                        Yayın Ayarları
+                    </h3>
+
+                    <div class="space-y-4">
+                        <!-- Status -->
+                        <div>
+                            <label for="status" class="block text-sm font-medium text-gray-700 mb-2">
+                                Durum
+                            </label>
+                            <select name="status" id="status" x-model="status"
+                                    class="block w-full px-4 py-2 border border-gray-200 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-admin-primary">
+                                <option value="draft">Taslak</option>
+                                <option value="published">Yayında</option>
+                                <option value="scheduled">Zamanlanmış</option>
+                                <option value="unlisted">Gizli (Sadece linkle erişim)</option>
+                            </select>
+                        </div>
+
+                        <!-- Scheduled Date -->
+                        <div x-show="status === 'scheduled'" x-cloak>
+                            <label for="published_at" class="block text-sm font-medium text-gray-700 mb-2">
+                                Yayın Tarihi
+                            </label>
+                            <input type="datetime-local" name="published_at" id="published_at"
+                                   value="{{ post.published_at|date:'Y-m-d\TH:i'|default:'' }}"
+                                   class="block w-full px-4 py-2 border border-gray-200 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-admin-primary">
+                        </div>
+
+                        <!-- Author -->
+                        <div>
+                            <label for="author" class="block text-sm font-medium text-gray-700 mb-2">
+                                Yazar
+                            </label>
+                            <select name="author" id="author"
+                                    class="block w-full px-4 py-2 border border-gray-200 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-admin-primary">
+                                <option value="{{ request.user.id }}" selected>{{ request.user.name|default:request.user.email }}</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="mt-6 space-y-3">
+                        <button type="submit" name="action" value="publish"
+                                class="w-full py-3 px-4 bg-gradient-to-r from-admin-primary to-admin-secondary text-white font-semibold rounded-xl hover:opacity-90 transition flex items-center justify-center shadow-lg shadow-indigo-500/30">
+                            <i class="fas fa-paper-plane mr-2"></i>
+                            {% if post %}Güncelle{% else %}Yayınla{% endif %}
+                        </button>
+                        <button type="submit" name="action" value="draft"
+                                class="w-full py-3 px-4 bg-gray-100 text-gray-700 font-medium rounded-xl hover:bg-gray-200 transition flex items-center justify-center">
+                            <i class="fas fa-save mr-2"></i>
+                            Taslak Olarak Kaydet
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Featured Image -->
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+                        <i class="fas fa-image text-blue-500 mr-2"></i>
+                        Öne Çıkan Görsel
+                    </h3>
+
+                    <div class="space-y-4">
+                        <!-- Image Preview -->
+                        {% if post.featured_image %}
+                        <div class="rounded-xl overflow-hidden">
+                            <img src="{{ post.featured_image.url }}" alt="Featured Image" class="w-full h-40 object-cover">
+                        </div>
+                        {% endif %}
+
+                        <!-- Upload -->
+                        <div class="border-2 border-dashed border-gray-200 rounded-xl p-6 text-center hover:border-admin-primary transition cursor-pointer">
+                            <input type="file" name="featured_image" id="featured_image" class="hidden" accept="image/*">
+                            <label for="featured_image" class="cursor-pointer">
+                                <i class="fas fa-cloud-upload-alt text-3xl text-gray-300 mb-2"></i>
+                                <p class="text-sm text-gray-500">Görsel yüklemek için tıklayın</p>
+                                <p class="text-xs text-gray-400 mt-1">PNG, JPG, GIF (max 5MB)</p>
+                            </label>
+                        </div>
+
+                        <!-- Or URL -->
+                        <div>
+                            <label for="featured_image_url" class="block text-sm font-medium text-gray-700 mb-2">
+                                veya URL girin
+                            </label>
+                            <input type="url" name="featured_image_url" id="featured_image_url"
+                                   value="{{ post.featured_image_url|default:'' }}"
+                                   class="block w-full px-4 py-2 border border-gray-200 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-admin-primary focus:border-transparent text-sm"
+                                   placeholder="https://example.com/image.jpg">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tags -->
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+                        <i class="fas fa-tags text-green-500 mr-2"></i>
+                        Etiketler
+                    </h3>
+
+                    <div>
+                        <input type="text" name="tags" id="tags"
+                               value="{{ post.tags|join:', '|default:'' }}"
+                               class="block w-full px-4 py-2 border border-gray-200 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-admin-primary focus:border-transparent"
+                               placeholder="django, python, web">
+                        <p class="text-xs text-gray-400 mt-1">Virgülle ayırarak girin</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Initialize SimpleMDE
+    var simplemde = new SimpleMDE({
+        element: document.getElementById("content"),
+        spellChecker: false,
+        autosave: {
+            enabled: true,
+            uniqueId: "blog-content-{{ post.id|default:'new' }}",
+            delay: 10000,
+        },
+        placeholder: "İçeriğinizi Markdown formatında yazın...",
+        toolbar: [
+            "bold", "italic", "heading", "|",
+            "quote", "unordered-list", "ordered-list", "|",
+            "link", "image", "code", "|",
+            "preview", "side-by-side", "fullscreen", "|",
+            "guide"
+        ]
+    });
+
+    // Auto-generate slug from title
+    document.getElementById('title').addEventListener('blur', function() {
+        var slugInput = document.getElementById('slug');
+        if (!slugInput.value) {
+            var slug = this.value
+                .toLowerCase()
+                .replace(/[^a-z0-9\s-]/g, '')
+                .replace(/\s+/g, '-')
+                .replace(/-+/g, '-')
+                .trim();
+            slugInput.value = slug;
+        }
+    });
+</script>
+{% endblock %}

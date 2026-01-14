@@ -1,0 +1,242 @@
+{% extends "admin/modern/base.html" %}
+
+{% block title %}SEO Ayarları{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto space-y-6">
+    <!-- Page Header -->
+    <div>
+        <h1 class="text-3xl font-bold text-gray-900">SEO Ayarları</h1>
+        <p class="mt-1 text-gray-500">Arama motoru optimizasyonu ve meta veri yönetimi</p>
+    </div>
+    
+    <!-- SEO Score Card -->
+    <div class="bg-gradient-to-r from-green-500 to-emerald-600 rounded-2xl p-6 text-white">
+        <div class="flex items-center justify-between">
+            <div>
+                <h2 class="text-lg font-semibold">SEO Sağlık Skoru</h2>
+                <p class="text-green-100 text-sm">Sitenizin SEO performansı</p>
+            </div>
+            <div class="w-20 h-20 rounded-full bg-white/20 flex items-center justify-center">
+                <span class="text-3xl font-bold">{{ seo_score|default:85 }}</span>
+            </div>
+        </div>
+        <div class="mt-4 grid grid-cols-4 gap-4">
+            <div class="text-center">
+                <p class="text-2xl font-bold">{{ meta_titles|default:12 }}</p>
+                <p class="text-xs text-green-100">Meta Başlık</p>
+            </div>
+            <div class="text-center">
+                <p class="text-2xl font-bold">{{ meta_descriptions|default:10 }}</p>
+                <p class="text-xs text-green-100">Meta Açıklama</p>
+            </div>
+            <div class="text-center">
+                <p class="text-2xl font-bold">{{ indexed_pages|default:25 }}</p>
+                <p class="text-xs text-green-100">İndeksli Sayfa</p>
+            </div>
+            <div class="text-center">
+                <p class="text-2xl font-bold">{{ sitemap_urls|default:30 }}</p>
+                <p class="text-xs text-green-100">Sitemap URL</p>
+            </div>
+        </div>
+    </div>
+    
+    <form method="POST" class="space-y-6">
+        {% csrf_token %}
+        
+        <!-- Global Meta Tags -->
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+            <div class="p-6 border-b border-gray-100">
+                <h2 class="text-lg font-semibold text-gray-900 flex items-center">
+                    <i class="fas fa-tags mr-2 text-blue-500"></i>
+                    Global Meta Etiketler
+                </h2>
+                <p class="text-sm text-gray-500 mt-1">Tüm sayfalarda kullanılacak varsayılan meta bilgileri</p>
+            </div>
+            <div class="p-6 space-y-6">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">
+                        Varsayılan Başlık Formatı
+                    </label>
+                    <input type="text" name="title_format" 
+                           value="{{ seo.title_format|default:'%page_title% | %site_name%' }}"
+                           class="block w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-admin-primary">
+                    <p class="text-xs text-gray-400 mt-1">Kullanılabilir değişkenler: %page_title%, %site_name%, %category%</p>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">
+                        Varsayılan Meta Açıklama
+                    </label>
+                    <textarea name="default_description" rows="3"
+                              class="block w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-admin-primary resize-none"
+                              placeholder="Site genelinde kullanılacak varsayılan açıklama...">{{ seo.default_description|default:'' }}</textarea>
+                    <div class="flex justify-between mt-1">
+                        <p class="text-xs text-gray-400">Önerilen: 150-160 karakter</p>
+                        <p class="text-xs text-gray-400"><span id="desc-count">0</span>/160</p>
+                    </div>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">
+                        Varsayılan Anahtar Kelimeler
+                    </label>
+                    <input type="text" name="default_keywords" 
+                           value="{{ seo.default_keywords|default:'' }}"
+                           class="block w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-admin-primary"
+                           placeholder="portfolio, developer, web, python, django">
+                    <p class="text-xs text-gray-400 mt-1">Virgülle ayırarak girin</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Open Graph / Social -->
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+            <div class="p-6 border-b border-gray-100">
+                <h2 class="text-lg font-semibold text-gray-900 flex items-center">
+                    <i class="fas fa-share-square mr-2 text-purple-500"></i>
+                    Open Graph / Sosyal Medya
+                </h2>
+                <p class="text-sm text-gray-500 mt-1">Sosyal medyada paylaşım görünümü</p>
+            </div>
+            <div class="p-6 space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">OG Başlık</label>
+                        <input type="text" name="og_title" value="{{ seo.og_title|default:'' }}"
+                               class="block w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-admin-primary"
+                               placeholder="Sosyal medya başlığı">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">OG Türü</label>
+                        <select name="og_type" class="block w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-admin-primary">
+                            <option value="website" {% if seo.og_type == 'website' %}selected{% endif %}>Website</option>
+                            <option value="article" {% if seo.og_type == 'article' %}selected{% endif %}>Article</option>
+                            <option value="profile" {% if seo.og_type == 'profile' %}selected{% endif %}>Profile</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">OG Görsel URL</label>
+                    <input type="url" name="og_image" value="{{ seo.og_image|default:'' }}"
+                           class="block w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-admin-primary"
+                           placeholder="https://example.com/og-image.jpg">
+                    <p class="text-xs text-gray-400 mt-1">Önerilen boyut: 1200x630 piksel</p>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Twitter Card Türü</label>
+                    <select name="twitter_card" class="block w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-admin-primary">
+                        <option value="summary" {% if seo.twitter_card == 'summary' %}selected{% endif %}>Summary</option>
+                        <option value="summary_large_image" {% if seo.twitter_card == 'summary_large_image' %}selected{% endif %}>Summary Large Image</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Sitemap & Robots -->
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+            <div class="p-6 border-b border-gray-100">
+                <h2 class="text-lg font-semibold text-gray-900 flex items-center">
+                    <i class="fas fa-sitemap mr-2 text-green-500"></i>
+                    Sitemap & Robots
+                </h2>
+            </div>
+            <div class="p-6 space-y-6">
+                <div class="flex items-center justify-between p-4 bg-gray-50 rounded-xl">
+                    <div>
+                        <p class="font-medium text-gray-900">Sitemap.xml</p>
+                        <p class="text-sm text-gray-500">Otomatik sitemap oluşturma</p>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <a href="/sitemap.xml" target="_blank" class="text-admin-primary hover:underline text-sm">
+                            <i class="fas fa-external-link-alt mr-1"></i> Görüntüle
+                        </a>
+                        <button type="button" class="px-4 py-2 bg-admin-primary text-white rounded-lg hover:bg-admin-secondary transition text-sm">
+                            <i class="fas fa-sync-alt mr-1"></i> Yenile
+                        </button>
+                    </div>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">robots.txt İçeriği</label>
+                    <textarea name="robots_txt" rows="6"
+                              class="block w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-admin-primary font-mono text-sm"
+                              placeholder="User-agent: *
+Allow: /
+Sitemap: https://example.com/sitemap.xml">{{ seo.robots_txt|default:'User-agent: *\nAllow: /\nSitemap: /sitemap.xml' }}</textarea>
+                </div>
+            </div>
+        </div>
+        
+        <!-- JSON-LD Schema -->
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+            <div class="p-6 border-b border-gray-100">
+                <h2 class="text-lg font-semibold text-gray-900 flex items-center">
+                    <i class="fas fa-code mr-2 text-orange-500"></i>
+                    JSON-LD Structured Data
+                </h2>
+                <p class="text-sm text-gray-500 mt-1">Arama motorları için yapılandırılmış veri</p>
+            </div>
+            <div class="p-6 space-y-4">
+                <div class="flex items-center space-x-3">
+                    <input type="checkbox" name="enable_jsonld" id="enable_jsonld"
+                           {% if seo.enable_jsonld %}checked{% endif %}
+                           class="w-4 h-4 text-admin-primary border-gray-300 rounded focus:ring-admin-primary">
+                    <label for="enable_jsonld" class="text-sm text-gray-700">JSON-LD Schema'yı aktif et</label>
+                </div>
+                
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <label class="flex items-center p-3 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50">
+                        <input type="checkbox" name="schema_person" class="w-4 h-4 text-admin-primary mr-3">
+                        <span class="text-sm">Person</span>
+                    </label>
+                    <label class="flex items-center p-3 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50">
+                        <input type="checkbox" name="schema_organization" class="w-4 h-4 text-admin-primary mr-3">
+                        <span class="text-sm">Organization</span>
+                    </label>
+                    <label class="flex items-center p-3 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50">
+                        <input type="checkbox" name="schema_website" class="w-4 h-4 text-admin-primary mr-3" checked>
+                        <span class="text-sm">Website</span>
+                    </label>
+                    <label class="flex items-center p-3 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50">
+                        <input type="checkbox" name="schema_breadcrumb" class="w-4 h-4 text-admin-primary mr-3" checked>
+                        <span class="text-sm">Breadcrumb</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Save Button -->
+        <div class="flex justify-end">
+            <button type="submit" 
+                    class="px-6 py-3 bg-gradient-to-r from-admin-primary to-admin-secondary text-white font-semibold rounded-xl hover:opacity-90 transition shadow-lg shadow-indigo-500/30">
+                <i class="fas fa-save mr-2"></i>
+                SEO Ayarlarını Kaydet
+            </button>
+        </div>
+    </form>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Character counter for meta description
+    const descInput = document.querySelector('textarea[name="default_description"]');
+    const descCount = document.getElementById('desc-count');
+    
+    if (descInput && descCount) {
+        descInput.addEventListener('input', function() {
+            descCount.textContent = this.value.length;
+            if (this.value.length > 160) {
+                descCount.classList.add('text-red-500');
+            } else {
+                descCount.classList.remove('text-red-500');
+            }
+        });
+        // Initial count
+        descCount.textContent = descInput.value.length;
+    }
+</script>
+{% endblock %}
