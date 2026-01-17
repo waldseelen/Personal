@@ -8,6 +8,7 @@ const withSerwist = withSerwistInit({
     swSrc: 'src/sw.ts',
     swDest: 'public/sw.js',
     disable: process.env.NODE_ENV === 'development',
+    maximumFileSizeToCacheInBytes: 5 * 1024 * 1024, // 5MB
 });
 
 /**
