@@ -21,21 +21,22 @@ export default defineConfig({
             use: { ...devices['Desktop Chrome'] },
         },
         {
-            name: 'firefox',
-            use: { ...devices['Desktop Firefox'] },
-        },
-        {
-            name: 'webkit',
-            use: { ...devices['Desktop Safari'] },
-        },
-        {
             name: 'Mobile Chrome',
             use: { ...devices['Pixel 5'] },
         },
-        {
-            name: 'Mobile Safari',
-            use: { ...devices['iPhone 12'] },
-        },
+        // Firefox and WebKit can be enabled after installing: npx playwright install
+        // {
+        //     name: 'firefox',
+        //     use: { ...devices['Desktop Firefox'] },
+        // },
+        // {
+        //     name: 'webkit',
+        //     use: { ...devices['Desktop Safari'] },
+        // },
+        // {
+        //     name: 'Mobile Safari',
+        //     use: { ...devices['iPhone 12'] },
+        // },
     ],
     webServer: {
         command: 'npm run start',

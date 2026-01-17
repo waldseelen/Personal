@@ -10,8 +10,15 @@ const withSerwist = withSerwistInit({
     disable: process.env.NODE_ENV === 'development',
 });
 
+/**
+ * Next.js Configuration
+ * Optimized for performance, security, and SEO
+ */
 const nextConfig: NextConfig = {
-    // Image optimization for Sanity
+    // Enable React strict mode for better development experience
+    reactStrictMode: true,
+
+    // Image optimization for Sanity and external sources
     images: {
         remotePatterns: [
             {
@@ -20,10 +27,25 @@ const nextConfig: NextConfig = {
                 pathname: '/images/**',
             },
         ],
+        // Optimize image loading
+        formats: ['image/avif', 'image/webp'],
+        minimumCacheTTL: 60 * 60 * 24, // 24 hours
     },
 
     // Turbopack for faster dev builds
     turbopack: {},
+
+    // Compiler optimizations
+    compiler: {
+        // Remove console.log in production
+        removeConsole: process.env.NODE_ENV === 'production' ? { exclude: ['error', 'warn'] } : false,
+    },
+
+    // Experimental features for better performance
+    experimental: {
+        // Optimize package imports
+        optimizePackageImports: ['framer-motion', '@sanity/client', 'next-intl'],
+    },
 
     // Headers for security and caching
     async headers() {
@@ -42,6 +64,24 @@ const nextConfig: NextConfig = {
                     {
                         key: 'X-XSS-Protection',
                         value: '1; mode=block',
+                    },
+                    {
+                        key: 'Referrer-Policy',
+                        value: 'strict-origin-when-cross-origin',
+                    },
+                    {
+                        key: 'Permissions-Policy',
+                        value: 'camera=(), microphone=(), geolocation=()',
+                    },
+                ],
+            },
+            {
+                // Static assets caching
+                source: '/(.*)\\.(ico|png|jpg|jpeg|gif|svg|webp|avif|woff|woff2)',
+                headers: [
+                    {
+                        key: 'Cache-Control',
+                        value: 'public, max-age=31536000, immutable',
                     },
                 ],
             },

@@ -1,6 +1,6 @@
 {
     "common": {
-        "siteName": "Portfolio",
+        "siteName": "Buğra Akın",
         "loading": "Yükleniyor...",
         "error": "Bir hata oluştu",
         "retry": "Tekrar Dene",
@@ -27,8 +27,8 @@
         "hero": {
             "greeting": "Merhaba, Ben",
             "name": "Buğra",
-            "title": "Full-Stack Developer",
-            "description": "Modern web teknolojileri ile yaratıcı ve performanslı çözümler geliştiriyorum.",
+            "title": "Yapay Zeka & Siber Güvenlik Araştırmacısı",
+            "description": "Geleceğin teknolojilerini güvenle inşa ediyorum. Yapay zeka sistemleri, LLM mimarileri ve siber güvenlik operasyonları üzerine çalışan bir mühendislik öğrencisiyim.",
             "cta": {
                 "primary": "Projelerimi Gör",
                 "secondary": "İletişime Geç"
@@ -36,22 +36,22 @@
         },
         "featuredProjects": {
             "title": "Öne Çıkan Projeler",
-            "subtitle": "Son dönemde üzerinde çalıştığım projeler",
+            "subtitle": "Yapay zeka ve güvenlik odaklı projelerim",
             "viewAll": "Tüm Projeler"
         },
         "featuredPosts": {
             "title": "Son Blog Yazıları",
-            "subtitle": "Yazılım geliştirme, teknoloji ve daha fazlası hakkında düşüncelerim",
+            "subtitle": "Yapay zeka, siber güvenlik ve teknoloji üzerine düşüncelerim",
             "viewAll": "Tüm Yazılar"
         },
         "skills": {
-            "title": "Yetenekler",
-            "subtitle": "Uzmanlaştığım teknolojiler ve araçlar"
+            "title": "Uzmanlık Alanları",
+            "subtitle": "Yapay Zeka, Siber Güvenlik ve Web Teknolojilerinde uzmanlaşıyorum"
         }
     },
     "blog": {
         "title": "Blog",
-        "subtitle": "Yazılım geliştirme, teknoloji trendleri ve kişisel deneyimlerim hakkında yazılar",
+        "subtitle": "Yapay zeka, siber güvenlik, teknoloji trendleri ve kişisel deneyimlerim hakkında yazılar",
         "categories": "Kategoriler",
         "allCategories": "Tümü",
         "publishedAt": "Yayınlanma Tarihi",
@@ -70,7 +70,7 @@
     },
     "projects": {
         "title": "Projeler",
-        "subtitle": "Geliştirdiğim projeler ve çalışmalar",
+        "subtitle": "Yapay zeka, güvenlik ve web teknolojileri alanında geliştirdiğim projeler",
         "technologies": "Teknolojiler",
         "viewProject": "Projeyi Gör",
         "viewCode": "Kodu Gör",
@@ -80,7 +80,7 @@
     },
     "about": {
         "title": "Hakkımda",
-        "subtitle": "Ben kimim, ne yapıyorum?",
+        "subtitle": "Yapay Zeka ve Siber Güvenlik Araştırmacısı",
         "bio": "Kısa Biyografi",
         "experience": "Deneyim",
         "education": "Eğitim",

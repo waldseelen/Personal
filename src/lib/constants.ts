@@ -1,17 +1,19 @@
 // Site configuration constants
 export const siteConfig = {
-    name: process.env.NEXT_PUBLIC_SITE_NAME || 'Portfolio',
-    description: 'Modern portfolio website built with Next.js and Sanity',
-    url: process.env.NEXT_PUBLIC_SITE_URL || 'https://example.com',
+    name: process.env.NEXT_PUBLIC_SITE_NAME || 'Buğra Akın',
+    description: 'Yapay Zeka, Siber Güvenlik ve Modern Web Teknolojileri üzerine çalışan Elektrik-Elektronik Mühendisliği öğrencisi.',
+    url: process.env.NEXT_PUBLIC_SITE_URL || 'https://bugraakin.com',
     author: {
-        name: 'Your Name',
-        email: 'email@example.com',
-        twitter: '@yourhandle',
+        name: 'Muhammed Buğra Akın',
+        email: 'bugraakin01@gmail.com',
+        twitter: '@bugraakin',
+        title: 'AI & Cybersecurity Researcher',
+        location: 'Gaziantep, Türkiye',
     },
     links: {
-        github: 'https://github.com/yourusername',
-        linkedin: 'https://linkedin.com/in/yourusername',
-        twitter: 'https://twitter.com/yourhandle',
+        github: 'https://github.com/waldseelen',
+        linkedin: 'https://linkedin.com/in/bugraakin',
+        twitter: 'https://twitter.com/bugraakin',
     },
 } as const;
 

@@ -34,7 +34,7 @@ export const metadata: Metadata = {
         template: `%s | ${siteConfig.name}`,
     },
     description: siteConfig.description,
-    keywords: ['portfolio', 'web development', 'full-stack', 'next.js', 'react', 'typescript'],
+    keywords: ['yapay zeka', 'siber güvenlik', 'AI', 'LLM', 'RAG', 'cybersecurity', 'next.js', 'react', 'python', 'prompt engineering'],
     authors: [{ name: siteConfig.author.name }],
     creator: siteConfig.author.name,
     publisher: siteConfig.author.name,

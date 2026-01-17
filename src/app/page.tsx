@@ -133,20 +133,20 @@ export default function HomePage() {
                                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary-400 opacity-75"></span>
                                 <span className="relative inline-flex h-2 w-2 rounded-full bg-primary-500"></span>
                             </span>
-                            Yeni projeler üzerinde çalışıyorum
+                            Yapay Zeka & Siber Güvenlik Araştırmacısı
                         </div>
 
                         {/* Heading */}
                         <h1 className="animate-fade-up heading-display text-balance mb-6">
-                            Merhaba, Ben{' '}
-                            <span className="gradient-text">Full-Stack</span>{' '}
-                            Geliştiriciyim
+                            Geleceğin Teknolojilerini{' '}
+                            <span className="gradient-text">Güvenle</span>{' '}
+                            İnşa Ediyorum
                         </h1>
 
                         {/* Description */}
                         <p className="animate-fade-up animate-delay-100 mx-auto mb-8 max-w-2xl text-lg text-neutral-600 md:text-xl dark:text-neutral-400">
-                            Modern web teknolojileri ile kullanıcı deneyimi odaklı, performanslı ve
-                            erişilebilir uygulamalar geliştiriyorum.
+                            Yapay zeka sistemleri, LLM mimarileri ve siber güvenlik operasyonları üzerine
+                            çalışan bir Elektrik-Elektronik Mühendisliği öğrencisiyim.
                         </p>
 
                         {/* CTA Buttons */}
@@ -175,7 +175,7 @@ export default function HomePage() {
                         <div>
                             <h2 className="heading-2">Öne Çıkan Projeler</h2>
                             <p className="mt-2 text-neutral-600 dark:text-neutral-400">
-                                Son dönemde üzerinde çalıştığım projeler
+                                Yapay zeka ve güvenlik odaklı projelerim
                             </p>
                         </div>
                         <Link
@@ -202,7 +202,7 @@ export default function HomePage() {
                         <div>
                             <h2 className="heading-2">Son Yazılar</h2>
                             <p className="mt-2 text-neutral-600 dark:text-neutral-400">
-                                Teknoloji ve yazılım üzerine düşüncelerim
+                                Yapay zeka, siber güvenlik ve teknoloji üzerine düşüncelerim
                             </p>
                         </div>
                         <Link
@@ -228,47 +228,47 @@ export default function HomePage() {
                     <div className="mx-auto max-w-3xl text-center">
                         <h2 className="heading-2">Uzmanlık Alanlarım</h2>
                         <p className="mt-4 text-neutral-600 dark:text-neutral-400">
-                            Modern web geliştirme teknolojilerinde uzmanlaşmış bir geliştiriciyim.
+                            Yapay Zeka, Siber Güvenlik ve Web Teknolojilerinde uzmanlaşıyorum.
                         </p>
                     </div>
 
                     <div className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-                        {/* Frontend */}
+                        {/* AI & LLM */}
                         <div className="rounded-2xl border border-neutral-200 p-6 transition-shadow hover:shadow-lg dark:border-neutral-800">
                             <div className="mb-4 inline-flex rounded-xl bg-primary-100 p-3 dark:bg-primary-900">
                                 <svg className="h-6 w-6 text-primary-600 dark:text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
                                 </svg>
                             </div>
-                            <h3 className="heading-3">Frontend Geliştirme</h3>
+                            <h3 className="heading-3">Yapay Zeka & LLM</h3>
                             <p className="mt-2 text-neutral-600 dark:text-neutral-400">
-                                React, Next.js, TypeScript ve Tailwind CSS ile modern kullanıcı arayüzleri.
+                                RAG mimarisi, fine-tuning, prompt mühendisliği ve vektör veritabanları.
                             </p>
                         </div>
 
-                        {/* Backend */}
+                        {/* Cybersecurity */}
                         <div className="rounded-2xl border border-neutral-200 p-6 transition-shadow hover:shadow-lg dark:border-neutral-800">
                             <div className="mb-4 inline-flex rounded-xl bg-accent-100 p-3 dark:bg-accent-900">
                                 <svg className="h-6 w-6 text-accent-600 dark:text-accent-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                                 </svg>
                             </div>
-                            <h3 className="heading-3">Backend Geliştirme</h3>
+                            <h3 className="heading-3">Siber Güvenlik</h3>
                             <p className="mt-2 text-neutral-600 dark:text-neutral-400">
-                                Node.js, Python, Django ve PostgreSQL ile güvenli API&apos;ler.
+                                SOC operasyonları, penetrasyon testleri, Fortigate ve SIEM sistemleri.
                             </p>
                         </div>
 
-                        {/* DevOps */}
+                        {/* Web Development */}
                         <div className="rounded-2xl border border-neutral-200 p-6 transition-shadow hover:shadow-lg dark:border-neutral-800">
                             <div className="mb-4 inline-flex rounded-xl bg-green-100 p-3 dark:bg-green-900">
                                 <svg className="h-6 w-6 text-green-600 dark:text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
                                 </svg>
                             </div>
-                            <h3 className="heading-3">DevOps & Cloud</h3>
+                            <h3 className="heading-3">Yazılım & Web</h3>
                             <p className="mt-2 text-neutral-600 dark:text-neutral-400">
-                                Docker, CI/CD, Vercel ve AWS ile modern deployment.
+                                Python, JavaScript, Next.js, Supabase ve REST API entegrasyonları.
                             </p>
                         </div>
                     </div>
@@ -280,7 +280,7 @@ export default function HomePage() {
                 <div className="container-custom text-center">
                     <h2 className="heading-2 text-white">Birlikte Çalışalım</h2>
                     <p className="mx-auto mt-4 max-w-2xl text-lg text-primary-100">
-                        Projeniz için bana ulaşın. Fikirlerinizi hayata geçirmek için buradayım.
+                        Yapay zeka, siber güvenlik veya web projeleri için bana ulaşın. Fikirlerinizi hayata geçirmek için buradayım.
                     </p>
                     <div className="mt-8">
                         <Link

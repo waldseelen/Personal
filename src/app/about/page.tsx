@@ -3,35 +3,35 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: 'Hakkımda',
-    description: 'Full-Stack Developer olarak deneyimlerim ve yeteneklerim.',
+    description: 'Yapay Zeka, Siber Güvenlik ve Modern Web Teknolojileri üzerine çalışan Elektrik-Elektronik Mühendisliği öğrencisi.',
 };
 
 export default function AboutPage() {
     const skills = {
-        frontend: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'Vue.js'],
-        backend: ['Node.js', 'Python', 'Django', 'FastAPI', 'PostgreSQL'],
-        tools: ['Git', 'Docker', 'Kubernetes', 'AWS', 'Vercel'],
-        other: ['Sanity CMS', 'GraphQL', 'REST API', 'CI/CD', 'Agile'],
+        aiLlm: ['RAG Mimarisi', 'Doküman Embedding', 'Vektör Veritabanları', 'LORA/QLORA Fine-tuning', 'Prompt Mühendisliği'],
+        cybersecurity: ['Fortigate Firewall (IPS, SSL VPN)', 'Penetrasyon Testleri (Burp Suite, SQLMap)', 'SOC Operasyonları (QRadar, CrowdStrike)', 'Linux Sistem Yönetimi'],
+        software: ['Python', 'JavaScript', 'HTML/CSS', 'Supabase', 'REST API', 'Next.js'],
+        tools: ['Git', 'Docker', 'Pipedream', 'VS Code', 'Jupyter'],
     };
 
     const experiences = [
         {
-            title: 'Senior Full-Stack Developer',
-            company: 'Şirket Adı',
-            period: '2022 - Günümüz',
-            description: 'Modern web uygulamaları geliştirme, ekip liderliği ve mimari tasarım.',
+            title: 'Stajyer - SOC Operasyonları',
+            company: 'Siber Güvenlik Firması',
+            period: '2025 - Günümüz',
+            description: 'QRadar SIEM ile güvenlik olay yönetimi, CrowdStrike EDR kullanımı ve tehdit analizi.',
         },
         {
-            title: 'Full-Stack Developer',
-            company: 'Şirket Adı',
-            period: '2020 - 2022',
-            description: 'E-ticaret platformları ve SaaS ürünleri geliştirme.',
+            title: 'Yapay Zeka Araştırmacısı',
+            company: 'Kişisel Projeler',
+            period: '2024 - Günümüz',
+            description: 'RAG mimarisi, LLM fine-tuning ve üretken yapay zeka uygulamaları geliştirme.',
         },
         {
-            title: 'Frontend Developer',
-            company: 'Şirket Adı',
-            period: '2018 - 2020',
-            description: 'React ve Vue.js ile kullanıcı arayüzleri tasarım ve geliştirme.',
+            title: 'Elektrik-Elektronik Mühendisliği',
+            company: 'Üniversite Eğitimi',
+            period: '2021 - Devam Ediyor',
+            description: 'Mühendislik temelleri, sinyal işleme ve gömülü sistemler üzerine eğitim.',
         },
     ];
 
@@ -63,14 +63,14 @@ export default function AboutPage() {
                     <div>
                         <h1 className="heading-1">Hakkımda</h1>
                         <p className="mt-6 text-lg text-neutral-600 dark:text-neutral-400">
-                            Merhaba! Ben {siteConfig.author.name}, tutkulu bir Full-Stack Developer&apos;ım.
-                            Modern web teknolojileri ile kullanıcı deneyimi odaklı, performanslı ve
-                            erişilebilir uygulamalar geliştirmeyi seviyorum.
+                            Merhaba! Ben {siteConfig.author.name}, Elektrik-Elektronik Mühendisliği öğrencisi ve
+                            Yapay Zeka & Siber Güvenlik araştırmacısıyım. Geleceğin teknolojilerini güvenle
+                            inşa etmeye tutkuyla bağlıyım.
                         </p>
                         <p className="mt-4 text-neutral-600 dark:text-neutral-400">
-                            5+ yıllık deneyimimle, startup&apos;lardan kurumsal şirketlere kadar birçok
-                            farklı projede çalıştım. Sürekli öğrenmeye ve yeni teknolojileri keşfetmeye
-                            açık biriyim.
+                            Özellikle Üretken Yapay Zeka (Generative AI), RAG mimarisi, Model Fine-tuning ve
+                            Siber Güvenlik operasyonları üzerine çalışıyorum. GPT, Claude, Gemini gibi LLM&apos;ler
+                            ile prompt mühendisliği deneyimim bulunuyor.
                         </p>
                         <div className="mt-8 flex flex-wrap gap-4">
                             <a href={siteConfig.links.github} target="_blank" rel="noopener noreferrer" className="btn-primary">
@@ -85,14 +85,14 @@ export default function AboutPage() {
 
                 {/* Skills Section */}
                 <section className="mb-16">
-                    <h2 className="heading-2 mb-8">Yetenekler</h2>
+                    <h2 className="heading-2 mb-8">Uzmanlık Alanları</h2>
                     <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
                         <div className="card">
                             <h3 className="mb-4 text-lg font-semibold text-primary-600 dark:text-primary-400">
-                                Frontend
+                                Yapay Zeka & LLM
                             </h3>
                             <ul className="space-y-2">
-                                {skills.frontend.map((skill) => (
+                                {skills.aiLlm.map((skill) => (
                                     <li key={skill} className="flex items-center gap-2 text-neutral-600 dark:text-neutral-400">
                                         <svg className="h-4 w-4 text-primary-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
@@ -104,10 +104,10 @@ export default function AboutPage() {
                         </div>
                         <div className="card">
                             <h3 className="mb-4 text-lg font-semibold text-accent-600 dark:text-accent-400">
-                                Backend
+                                Siber Güvenlik
                             </h3>
                             <ul className="space-y-2">
-                                {skills.backend.map((skill) => (
+                                {skills.cybersecurity.map((skill) => (
                                     <li key={skill} className="flex items-center gap-2 text-neutral-600 dark:text-neutral-400">
                                         <svg className="h-4 w-4 text-accent-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
@@ -118,13 +118,13 @@ export default function AboutPage() {
                             </ul>
                         </div>
                         <div className="card">
-                            <h3 className="mb-4 text-lg font-semibold text-neutral-900 dark:text-neutral-50">
-                                DevOps & Tools
+                            <h3 className="mb-4 text-lg font-semibold text-green-600 dark:text-green-400">
+                                Yazılım & Web
                             </h3>
                             <ul className="space-y-2">
-                                {skills.tools.map((skill) => (
+                                {skills.software.map((skill) => (
                                     <li key={skill} className="flex items-center gap-2 text-neutral-600 dark:text-neutral-400">
-                                        <svg className="h-4 w-4 text-neutral-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <svg className="h-4 w-4 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                                         </svg>
                                         {skill}
@@ -134,10 +134,10 @@ export default function AboutPage() {
                         </div>
                         <div className="card">
                             <h3 className="mb-4 text-lg font-semibold text-neutral-900 dark:text-neutral-50">
-                                Diğer
+                                Araçlar
                             </h3>
                             <ul className="space-y-2">
-                                {skills.other.map((skill) => (
+                                {skills.tools.map((skill) => (
                                     <li key={skill} className="flex items-center gap-2 text-neutral-600 dark:text-neutral-400">
                                         <svg className="h-4 w-4 text-neutral-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />

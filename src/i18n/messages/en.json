@@ -1,6 +1,6 @@
 {
     "common": {
-        "siteName": "Portfolio",
+        "siteName": "Buğra Akın",
         "loading": "Loading...",
         "error": "An error occurred",
         "retry": "Try Again",
@@ -27,8 +27,8 @@
         "hero": {
             "greeting": "Hi, I'm",
             "name": "Buğra",
-            "title": "Full-Stack Developer",
-            "description": "I develop creative and performant solutions using modern web technologies.",
+            "title": "AI & Cybersecurity Researcher",
+            "description": "Building the future with secure technologies. I'm an engineering student working on AI systems, LLM architectures, and cybersecurity operations.",
             "cta": {
                 "primary": "View My Projects",
                 "secondary": "Get in Touch"
@@ -36,22 +36,22 @@
         },
         "featuredProjects": {
             "title": "Featured Projects",
-            "subtitle": "Projects I've been working on recently",
+            "subtitle": "AI and security-focused projects",
             "viewAll": "All Projects"
         },
         "featuredPosts": {
             "title": "Latest Blog Posts",
-            "subtitle": "My thoughts on software development, technology, and more",
+            "subtitle": "My thoughts on artificial intelligence, cybersecurity, and technology",
             "viewAll": "All Posts"
         },
         "skills": {
-            "title": "Skills",
-            "subtitle": "Technologies and tools I specialize in"
+            "title": "Areas of Expertise",
+            "subtitle": "Specializing in Artificial Intelligence, Cybersecurity, and Web Technologies"
         }
     },
     "blog": {
         "title": "Blog",
-        "subtitle": "Articles about software development, technology trends, and personal experiences",
+        "subtitle": "Articles about artificial intelligence, cybersecurity, technology trends, and personal experiences",
         "categories": "Categories",
         "allCategories": "All",
         "publishedAt": "Published on",
@@ -70,7 +70,7 @@
     },
     "projects": {
         "title": "Projects",
-        "subtitle": "Projects and works I've developed",
+        "subtitle": "Projects in artificial intelligence, security, and web technologies",
         "technologies": "Technologies",
         "viewProject": "View Project",
         "viewCode": "View Code",
@@ -80,7 +80,7 @@
     },
     "about": {
         "title": "About Me",
-        "subtitle": "Who am I, what do I do?",
+        "subtitle": "AI & Cybersecurity Researcher",
         "bio": "Bio",
         "experience": "Experience",
         "education": "Education",
