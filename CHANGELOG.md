@@ -4,6 +4,7 @@
 ### Bug Fixes
 
 * align Node.js version with production deployment (20.x) ([557595f](https://github.com/waldseelen/Personal/commit/557595f54a8a43d7c7d565accee07f13cf20f07d))
+* remove duplicate studio route and unused live.ts file ([8259f20](https://github.com/waldseelen/Personal/commit/8259f204a520bc74df370aef8543767ac3ad5bb0))
 * stabilize studio route and lock node version ([f181038](https://github.com/waldseelen/Personal/commit/f181038913f13d97691ccee4a00487a973432778))
 * Vercel deploy hatalarını düzelt - Sanity client ve console.log uyarıları ([dd0b05e](https://github.com/waldseelen/Personal/commit/dd0b05ee058d09cbb9ce7260362a2ccd270921d7))
 * vercel.json - env alanını kaldır ([3695ced](https://github.com/waldseelen/Personal/commit/3695cede9ad7a9e95b2641b073418d8ccaf8def6))
