@@ -2,7 +2,7 @@
 
 import { localeFlags, localeNames, locales, type Locale } from '@/i18n/config';
 import { cn } from '@/lib/utils';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState, useTransition } from 'react';
 
 interface LanguageToggleProps {
@@ -19,33 +19,79 @@ export function LanguageToggle({
     variant = 'button',
 }: LanguageToggleProps) {
     const router = useRouter();
+    const pathname = usePathname();
     const [isPending, startTransition] = useTransition();
     const [currentLocale, setCurrentLocale] = useState<Locale>('tr');
     const [isOpen, setIsOpen] = useState(false);
+    const [mounted, setMounted] = useState(false);
 
-    // Get current locale from cookie on mount
+    // Get saved language preference OR detect from geoIP
     useEffect(() => {
-        const locale = document.cookie
-            .split('; ')
-            .find((row) => row.startsWith('NEXT_LOCALE='))
-            ?.split('=')[1] as Locale | undefined;
+        const getSavedLocale = async (): Promise<Locale> => {
+            if (typeof window === 'undefined') return 'tr';
 
-        if (locale && locales.includes(locale)) {
+            // 1. localStorage'dan oku (birincil tercih - kullanıcı ayarı)
+            const savedLocale = localStorage.getItem('preferredLocale') as Locale | null;
+            if (savedLocale && locales.includes(savedLocale)) {
+                return savedLocale;
+            }
+
+            // 2. Cookie'den oku
+            const cookieLocale = document.cookie
+                .split('; ')
+                .find((row) => row.startsWith('NEXT_LOCALE='))
+                ?.split('=')[1] as Locale | undefined;
+
+            if (cookieLocale && locales.includes(cookieLocale)) {
+                return cookieLocale;
+            }
+
+            // 3. GeoIP'den otomatik detect (ilk ziyaret - birincil senaryo)
+            try {
+                const response = await fetch('/api/geo-locale');
+                const data = await response.json();
+                if (data.locale && locales.includes(data.locale)) {
+                    return data.locale;
+                }
+            } catch (error) {
+                console.error('GeoIP detection failed:', error);
+            }
+
+            return 'tr'; // Default fallback
+        };
+
+        getSavedLocale().then((locale) => {
             setCurrentLocale(locale);
-        }
+            setMounted(true);
+        });
     }, []);
 
     const switchLocale = (newLocale: Locale) => {
-        // Set cookie with 1 year expiry
+        if (newLocale === currentLocale) return;
+
+        // 1. localStorage'a kaydet (persistent - birincil)
+        localStorage.setItem('preferredLocale', newLocale);
+
+        // 2. Cookie'ye de kaydet (1 yıl geçerlilik)
         document.cookie = `NEXT_LOCALE=${newLocale}; path=/; max-age=31536000; SameSite=Lax`;
+
+        // 3. State'i güncelle (session içinde anlık toggle için)
         setCurrentLocale(newLocale);
         setIsOpen(false);
 
-        // Refresh the page to apply new locale
+        // 4. URL'yi güncelle
+        const pathWithoutLocale = pathname.replace(/^\/(en|tr)/, '') || '/';
+        const newPath = newLocale === 'tr' ? pathWithoutLocale : `/${newLocale}${pathWithoutLocale}`;
+
         startTransition(() => {
-            router.refresh();
+            router.push(newPath);
         });
     };
+
+    // Hydration mismatch'i önle
+    if (!mounted) {
+        return null;
+    }
 
     const otherLocale = currentLocale === 'tr' ? 'en' : 'tr';
 

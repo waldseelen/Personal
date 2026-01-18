@@ -1,0 +1,83 @@
+
+> portfolio-nextjs@1.0.0 build
+> next build
+
+   Ôû▓ Next.js 15.5.9
+   - Environments: .env.local
+   - Experiments (use with caution):
+     ┬À optimizePackageImports
+
+   Creating an optimized production build ...
+ Ô£ô (serwist) Bundling the service worker script with the URL '/sw.js' and the scope '/'...
+ ÔÜá Compiled with warnings in 8.5s
+
+/_next/static/chunks/d8e9270f-f4f23c6ae14cdae9.js is 2.27 MB, and won't be precached. Configure maximumFileSizeToCacheInBytes to change this limit.
+
+   Linting and checking validity of types ...
+   Collecting page data ...
+   Generating static pages (0/42) ...
+   Generating static pages (10/42) 
+   Generating static pages (20/42) 
+   Generating static pages (31/42) 
+ Ô£ô Generating static pages (42/42)
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (app)                                 Size  First Load JS  Revalidate  Expire
+Ôöî ãÆ /                                      349 B         172 kB
+Ôö£ ãÆ /_not-found                            210 B         104 kB
+Ôö£ ãÆ /about                                 210 B         104 kB
+Ôö£ ãÆ /api/analytics                         210 B         104 kB
+Ôö£ ãÆ /api/analytics/dashboard               210 B         104 kB
+Ôö£ ãÆ /api/auth/[...nextauth]                210 B         104 kB
+Ôö£ ãÆ /api/blog                              336 B         163 kB
+Ôö£ ãÆ /api/blog/[slug]                       336 B         163 kB
+Ôö£ ãÆ /api/chat                              210 B         104 kB
+Ôö£ ãÆ /api/chat/clear                        210 B         104 kB
+Ôö£ ãÆ /api/chat/history                      210 B         104 kB
+Ôö£ ãÆ /api/comments                          210 B         104 kB
+Ôö£ ãÆ /api/comments/moderate/[id]            210 B         104 kB
+Ôö£ ãÆ /api/contact                           210 B         104 kB
+Ôö£ ãÆ /api/gdpr/delete                       210 B         104 kB
+Ôö£ ãÆ /api/gdpr/export                       210 B         104 kB
+Ôö£ ãÆ /api/health                            210 B         104 kB
+Ôö£ ãÆ /api/health/liveness                   210 B         104 kB
+Ôö£ ãÆ /api/health/readiness                  210 B         104 kB
+Ôö£ ãÆ /api/playground/execute                210 B         104 kB
+Ôö£ ãÆ /api/playground/languages              210 B         104 kB
+Ôö£ ãÆ /api/projects                          336 B         163 kB
+Ôö£ ãÆ /api/projects/[slug]                   336 B         163 kB
+Ôö£ ãÆ /api/push/send                         210 B         104 kB
+Ôö£ ãÆ /api/push/subscribe                    210 B         104 kB
+Ôö£ ãÆ /api/push/unsubscribe                  210 B         104 kB
+Ôö£ ãÆ /api/revalidate                        210 B         104 kB
+Ôö£ ãÆ /api/search                            210 B         104 kB
+Ôö£ ãÆ /api/search/analytics                  210 B         104 kB
+Ôö£ ãÆ /api/search/autocomplete               210 B         104 kB
+Ôö£ ãÆ /api/search/filters                    210 B         104 kB
+Ôö£ ãÆ /blog                                  351 B         172 kB
+Ôö£ ÔùÅ /blog/[slug]                         3.66 kB         158 kB
+Ôö£   Ôö£ /blog/nextjs-15-modern-web
+Ôö£   Ôö£ /blog/typescript-best-practices
+Ôö£   Ôöö /blog/sanity-cms-headless
+Ôö£ ãÆ /contact                             2.02 kB         106 kB
+Ôö£ ãÆ /offline                               878 B         108 kB
+Ôö£ ãÆ /projects                              351 B         172 kB
+Ôö£ ÔùÅ /projects/[slug]                       170 B         107 kB
+Ôö£   Ôö£ /projects/e-commerce-platform
+Ôö£   Ôö£ /projects/task-management-app
+Ôö£   Ôö£ /projects/ai-content-generator
+Ôö£   Ôöö /projects/portfolio-website
+Ôö£ Ôùï /robots.txt                            210 B         104 kB
+Ôö£ Ôùï /sitemap.xml                           210 B         104 kB          6h      1y
+Ôöö ãÆ /studio/[[...index]]                 1.43 MB        1.62 MB
++ First Load JS shared by all             104 kB
+  Ôö£ chunks/4bd1b696-182b6b13bdad92e3.js  54.2 kB
+  Ôö£ chunks/6061-8b694e768567d7e3.js      46.8 kB
+  Ôöö other shared chunks (total)          2.72 kB
+
+
+Ôùï  (Static)   prerendered as static content
+ÔùÅ  (SSG)      prerendered as static HTML (uses generateStaticParams)
+ãÆ  (Dynamic)  server-rendered on demand
+
